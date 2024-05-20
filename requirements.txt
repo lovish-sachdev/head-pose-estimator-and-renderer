@@ -1,0 +1,9 @@
+vtk==9.3.0
+Pillow==9.2.0
+streamlit==1.29.0
+opencv-python-headless==4.9.0.80
+mediapipe==0.10.9
+numpy==1.23.5
+keras==2.15.0
+streamlit-webrtc==0.47.6
+av==11.0.0
