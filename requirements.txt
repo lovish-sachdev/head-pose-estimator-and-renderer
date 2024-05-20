@@ -12,4 +12,3 @@ numpy==1.23.5
 keras==2.15.0
 streamlit-webrtc==0.47.6
 av==11.0.0
-vtkmodules
