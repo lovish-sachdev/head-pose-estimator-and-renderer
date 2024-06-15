@@ -7,3 +7,4 @@ numpy
 keras
 streamlit-webrtc
 av
+tensorflow
