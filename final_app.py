@@ -69,12 +69,12 @@ class VideoProcessor(VideoTransformerBase):
                         face_2d=np.array(face_2d,dtype=np.float64)
                         data=face_2d.flatten()
                         data=np.reshape(data,(1,12,))
-            #             label=headpose_model.predict(data,verbose=0)[0]
-            #             deg_x,deg_y,deg_z,t_x,t_y,t_z=label
-            #             img_to_stack=rotate(deg_x,deg_y,deg_z) 
-            #             output_img=np.vstack((image,img_to_stack)) 
-            #             output_img=cv2.resize(output_img,(640,480))
-            #             output_img=output_img.astype("uint8")
+                        label=headpose_model.predict(data,verbose=0)[0]
+                        deg_x,deg_y,deg_z,t_x,t_y,t_z=label
+                        img_to_stack=rotate(deg_x,deg_y,deg_z) 
+                        output_img=np.vstack((image,img_to_stack)) 
+                        output_img=cv2.resize(output_img,(640,480))
+                        output_img=output_img.astype("uint8")
             # return output_img
             return np.ones((480,640,3),dtype="uint8")*200
         frm=frame.to_ndarray(format="bgr24")
