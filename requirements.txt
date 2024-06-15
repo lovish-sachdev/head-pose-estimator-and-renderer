@@ -4,7 +4,7 @@ streamlit
 opencv-python-headless
 mediapipe
 numpy
-keras
+keras==2.15.0
 streamlit-webrtc
 av
-tensorflow
+tensorflow==2.15.0
