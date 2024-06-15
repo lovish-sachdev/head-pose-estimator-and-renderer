@@ -65,10 +65,10 @@ class VideoProcessor(VideoTransformerBase):
                         x,y=int(lm.x*img_w),int(lm.y*img_h)
                         face_2d.append([x,y])
                         cv2.circle(image,(x,y),2,(0,255,0),thickness=-1)
-                    # if counter==0 and type(face_2d)!=type(None):
-                    #     face_2d=np.array(face_2d,dtype=np.float64)
-                    #     data=face_2d.flatten()
-                    #     data=np.reshape(data,(1,12,))
+                    if counter==0 and type(face_2d)!=type(None):
+                        face_2d=np.array(face_2d,dtype=np.float64)
+                        data=face_2d.flatten()
+                        data=np.reshape(data,(1,12,))
                     #     label=headpose_model.predict(data,verbose=0)[0]
                     #     deg_x,deg_y,deg_z,t_x,t_y,t_z=label
                     #     img_to_stack=rotate(deg_x,deg_y,deg_z) 
