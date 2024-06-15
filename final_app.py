@@ -76,14 +76,11 @@ class VideoProcessor(VideoTransformerBase):
         #                 output_img=cv2.resize(output_img,(640,480))
         #                 output_img=output_img.astype("uint8")
         #     return output_img
-        # try:
-        #     frm=frame.to_ndarray(format="bgr24")
-        #     image=cv2.flip(frm,1)
-        #     image2=logic(image)
-        #     return av.VideoFrame.from_ndarray(image2,format="bgr24")
-        # except:
-        #     return av.VideoFrame.from_ndarray(output_img,format="bgr24")
-        return av.VideoFrame.from_ndarray(frame,format="bgr24")
+        frm=frame.to_ndarray(format="bgr24")
+        image=cv2.flip(frm,1)
+        # image2=logic(image)
+        return av.VideoFrame.from_ndarray(image,format="bgr24")
+        # return av.VideoFrame.from_ndarray(frame,format="bgr24")
 
 
 
