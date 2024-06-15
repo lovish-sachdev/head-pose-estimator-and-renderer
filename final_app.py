@@ -49,41 +49,41 @@ def get_ice_servers():
 class VideoProcessor(VideoTransformerBase):
     def recv(self, frame):
 
-        # def logic(image):
-        #     global img_to_stack,counter,output_img
-        #     img_h,img_w,img_c=image.shape
-        #     results=face_mesh.process(image)
-        #     face_2d=[]
-        #     if results.multi_face_landmarks:
-        #         counter+=1
-        #         counter%=1
-        #         for face_landmarks in results.multi_face_landmarks:
-        #             idx=0
-        #             ## indexes of 6 points used during training
-        #             for idx in [1,199,263,33,291,61]:
-        #                 lm= face_landmarks.landmark[idx]
-        #                 x,y=int(lm.x*img_w),int(lm.y*img_h)
-        #                 face_2d.append([x,y])
-        #                 cv2.circle(image,(x,y),2,(0,255,0),thickness=-1)
-        #             if counter==0:
-        #                 face_2d=np.array(face_2d,dtype=np.float64)
-        #                 data=face_2d.flatten()
-        #                 data=np.reshape(data,(1,12,))
-        #                 label=headpose_model.predict(data,verbose=0)[0]
-        #                 deg_x,deg_y,deg_z,t_x,t_y,t_z=label
-        #                 img_to_stack=rotate(deg_x,deg_y,deg_z) 
-        #                 output_img=np.vstack((image,img_to_stack)) 
-        #                 output_img=cv2.resize(output_img,(640,480))
-        #                 output_img=output_img.astype("uint8")
-        #     return output_img
-        # try:
-        #     frm=frame.to_ndarray(format="bgr24")
-        #     image=cv2.flip(frm,1)
-        #     image2=logic(image)
-        #     return av.VideoFrame.from_ndarray(image2,format="bgr24")
-        # except:
-        #     return av.VideoFrame.from_ndarray(output_img,format="bgr24")
-        return av.VideoFrame.from_ndarray(frame,format="bgr24")
+        def logic(image):
+            global img_to_stack,counter,output_img
+            img_h,img_w,img_c=image.shape
+            results=face_mesh.process(image)
+            face_2d=[]
+            if results.multi_face_landmarks:
+                counter+=1
+                counter%=1
+                for face_landmarks in results.multi_face_landmarks:
+                    idx=0
+                    ## indexes of 6 points used during training
+                    for idx in [1,199,263,33,291,61]:
+                        lm= face_landmarks.landmark[idx]
+                        x,y=int(lm.x*img_w),int(lm.y*img_h)
+                        face_2d.append([x,y])
+                        cv2.circle(image,(x,y),2,(0,255,0),thickness=-1)
+                    if counter==0:
+                        face_2d=np.array(face_2d,dtype=np.float64)
+                        data=face_2d.flatten()
+                        data=np.reshape(data,(1,12,))
+                        label=headpose_model.predict(data,verbose=0)[0]
+                        deg_x,deg_y,deg_z,t_x,t_y,t_z=label
+                        img_to_stack=rotate(deg_x,deg_y,deg_z) 
+                        output_img=np.vstack((image,img_to_stack)) 
+                        output_img=cv2.resize(output_img,(640,480))
+                        output_img=output_img.astype("uint8")
+            return output_img
+        try:
+            frm=frame.to_ndarray(format="bgr24")
+            image=cv2.flip(frm,1)
+            image2=logic(image)
+            return av.VideoFrame.from_ndarray(image2,format="bgr24")
+        except:
+            return av.VideoFrame.from_ndarray(output_img,format="bgr24")
+        # return av.VideoFrame.from_ndarray(frame,format="bgr24")
 
 
 
