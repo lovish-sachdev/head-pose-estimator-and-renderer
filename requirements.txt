@@ -7,5 +7,5 @@ numpy
 keras==2.15.0
 streamlit-webrtc
 av
-tensorflow====2.15.0
+tensorflow==2.15.0
 twilio
