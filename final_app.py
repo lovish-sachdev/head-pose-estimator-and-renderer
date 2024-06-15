@@ -49,9 +49,9 @@ def get_ice_servers():
 class VideoProcessor(VideoTransformerBase):
     def recv(self, frame):
 
-        # def logic(image):
-        #     global img_to_stack,counter,output_img
-        #     img_h,img_w,img_c=image.shape
+        def logic(image):
+            global img_to_stack,counter,output_img
+            img_h,img_w,img_c=image.shape
         #     results=face_mesh.process(image)
         #     face_2d=[]
         #     if results.multi_face_landmarks:
@@ -75,11 +75,11 @@ class VideoProcessor(VideoTransformerBase):
         #                 output_img=np.vstack((image,img_to_stack)) 
         #                 output_img=cv2.resize(output_img,(640,480))
         #                 output_img=output_img.astype("uint8")
-        #     return output_img
+            return output_img
         frm=frame.to_ndarray(format="bgr24")
         image=cv2.flip(frm,1)
-        # image2=logic(image)
-        return av.VideoFrame.from_ndarray(image,format="bgr24")
+        image2=logic(image)
+        return av.VideoFrame.from_ndarray(image2,format="bgr24")
         # return av.VideoFrame.from_ndarray(frame,format="bgr24")
 
 
