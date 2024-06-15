@@ -9,7 +9,6 @@ import cv2
 import mediapipe as mp
 import numpy as np
 import time
-from tensorflow.keras.models import model_from_json
 import os
 from keras.models import model_from_json
 from streamlit_webrtc import webrtc_streamer,RTCConfiguration,VideoTransformerBase
