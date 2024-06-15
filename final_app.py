@@ -52,11 +52,11 @@ class VideoProcessor(VideoTransformerBase):
         def logic(image):
             global img_to_stack,counter,output_img
             img_h,img_w,img_c=image.shape
-        #     results=face_mesh.process(image)
-        #     face_2d=[]
-        #     if results.multi_face_landmarks:
-        #         counter+=1
-        #         counter%=1
+            results=face_mesh.process(image)
+            face_2d=[]
+            if results.multi_face_landmarks:
+                counter+=1
+                counter%=1
         #         for face_landmarks in results.multi_face_landmarks:
         #             idx=0
         #             ## indexes of 6 points used during training
