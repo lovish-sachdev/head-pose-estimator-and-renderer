@@ -1,7 +1,7 @@
 ## om namah shivay
 
 ## imports
-import vtk
+from vtk import vtkObject ,vtkWindowToImageFilter,vtkGLTFImporter,vtkRenderer,vtkRenderWindow,vtkTransform
 from PIL import Image
 import streamlit as st
 import warnings
@@ -55,7 +55,7 @@ class VideoProcessor(VideoTransformerBase):
 
 def main():
     st.title("Real-time Video Stream using WebRTC")
-    vtk.vtkObject.GlobalWarningDisplayOff() 
+    vtkObject.GlobalWarningDisplayOff() 
     webrtc_streamer(key="example", video_processor_factory=VideoProcessor)
 
 
@@ -75,7 +75,7 @@ def rotate(angle_x,angle_y,angle_z):
         actor.SetUserTransform(transform)
         actor = imported_actors.GetNextActor()
     render_window.Render()
-    window_to_image_filter = vtk.vtkWindowToImageFilter()
+    window_to_image_filter = vtkWindowToImageFilter()
     window_to_image_filter.SetInput(render_window)
     window_to_image_filter.Update()
 
@@ -99,12 +99,12 @@ if __name__=="__main__":
     pre_x,pre_y,pre_z=90,180,0
     image_holder_frame=st.empty()
     # # Load GLB file
-    importer = vtk.vtkGLTFImporter()
+    importer = vtkGLTFImporter()
     importer.SetFileName(os.path.join(main_dir,"mark_85.glb"))
     importer.Read()
 
     # # Create a renderer
-    renderer = vtk.vtkRenderer()
+    renderer = vtkRenderer()
     renderer.SetBackground(1.0, 1.0, 1.0)
 
     # Add the imported actors to the renderer
@@ -116,11 +116,11 @@ if __name__=="__main__":
         actor = imported_actors.GetNextActor()
 
     # Create a render window
-    render_window = vtk.vtkRenderWindow()
+    render_window = vtkRenderWindow()
     render_window.SetSize(640, 480)
     render_window.OffScreenRenderingOn()
     render_window.AddRenderer(renderer)
-    transform = vtk.vtkTransform()
+    transform = vtkTransform()
     
     headpose_model_json_path=os.path.join(main_dir,"models","head_pose_model.json")
     headpose_model_weights_path=os.path.join(main_dir,"models","head_pose_model_weights.h5")
