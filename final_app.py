@@ -75,8 +75,8 @@ class VideoProcessor(VideoTransformerBase):
                         output_img=np.vstack((image,img_to_stack)) 
                         output_img=cv2.resize(output_img,(640,480))
                         output_img=output_img.astype("uint8")
-            return output_img
-            # return np.ones((480,640,3),dtype="uint8")*200
+            # return output_img
+            return np.ones((480,640,3),dtype="uint8")*200
         frm=frame.to_ndarray(format="bgr24")
         image=cv2.flip(frm,1)
         image2=logic(image)
