@@ -71,7 +71,7 @@ class VideoProcessor(VideoTransformerBase):
                         data=np.reshape(data,(1,12,))
                         label=headpose_model.predict(data,verbose=0)[0]
                         deg_x,deg_y,deg_z,t_x,t_y,t_z=label
-                    #     img_to_stack=rotate(deg_x,deg_y,deg_z) 
+                        img_to_stack=rotate(deg_x,deg_y,deg_z) 
                         output_img=np.vstack((image,img_to_stack)) 
                         output_img=cv2.resize(output_img,(640,480))
                         output_img=output_img.astype("uint8")
@@ -106,30 +106,32 @@ def main():
 
 def rotate(angle_x,angle_y,angle_z):
     global pre_x,pre_y,pre_z,transform,imported_actors,actor,render_window,image_holder_frame
-    transform.Identity()
-    transform.RotateX(-angle_x-pre_x)
-    transform.RotateY(-angle_z-pre_z)
-    transform.RotateZ(-angle_y-pre_y)
-    imported_actors.InitTraversal()
-    actor = imported_actors.GetNextActor()
-    while actor:
-        actor.SetUserTransform(transform)
+    try:
+        transform.Identity()
+        transform.RotateX(-angle_x-pre_x)
+        transform.RotateY(-angle_z-pre_z)
+        transform.RotateZ(-angle_y-pre_y)
+        imported_actors.InitTraversal()
         actor = imported_actors.GetNextActor()
-    render_window.Render()
-    window_to_image_filter = vtkWindowToImageFilter()
-    window_to_image_filter.SetInput(render_window)
-    window_to_image_filter.Update()
+        while actor:
+            actor.SetUserTransform(transform)
+            actor = imported_actors.GetNextActor()
+        render_window.Render()
+        window_to_image_filter = vtkWindowToImageFilter()
+        window_to_image_filter.SetInput(render_window)
+        window_to_image_filter.Update()
 
-    # Convert vtkImageData to numpy array
-    vtk_image = window_to_image_filter.GetOutput()
-    width, height, _ = vtk_image.GetDimensions()
-    vtk_array = vtk_image.GetPointData().GetScalars()
-    vtk_array.SetNumberOfComponents(3)  # Ensure RGB
-    np_image = np.array(vtk_array).reshape(height, width, 3)
-
-    # # Convert RGB to BGR
-    np_image = np_image[:, :, ::-1]
-    return np_image
+        # Convert vtkImageData to numpy array
+        vtk_image = window_to_image_filter.GetOutput()
+        width, height, _ = vtk_image.GetDimensions()
+        vtk_array = vtk_image.GetPointData().GetScalars()
+        vtk_array.SetNumberOfComponents(3)  # Ensure RGB
+        np_image = np.array(vtk_array).reshape(height, width, 3)
+        # # Convert RGB to BGR
+        np_image = np_image[:, :, ::-1]
+        return np_image
+    except:
+        return np.zeros((480,640,3),dtype="uint8")
 
 
 if __name__=="__main__":
