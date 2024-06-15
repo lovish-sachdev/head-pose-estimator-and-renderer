@@ -121,11 +121,11 @@ def rotate(angle_x,angle_y,angle_z):
         window_to_image_filter.SetInput(render_window)
         window_to_image_filter.Update()
 
-        # # Convert vtkImageData to numpy array
-        # vtk_image = window_to_image_filter.GetOutput()
-        # width, height, _ = vtk_image.GetDimensions()
-        # vtk_array = vtk_image.GetPointData().GetScalars()
-        # vtk_array.SetNumberOfComponents(3)  # Ensure RGB
+        # Convert vtkImageData to numpy array
+        vtk_image = window_to_image_filter.GetOutput()
+        width, height, _ = vtk_image.GetDimensions()
+        vtk_array = vtk_image.GetPointData().GetScalars()
+        vtk_array.SetNumberOfComponents(3)  # Ensure RGB
         # np_image = np.array(vtk_array).reshape(height, width, 3)
         # # # Convert RGB to BGR
         # np_image = np_image[:, :, ::-1]
