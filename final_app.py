@@ -128,7 +128,7 @@ def rotate(angle_x,angle_y,angle_z):
         vtk_array.SetNumberOfComponents(3)  # Ensure RGB
         np_image = np.array(vtk_array).reshape(height, width, 3)
         # # Convert RGB to BGR
-        np_image = np_image[:, :, ::-1]
+        # np_image = np_image[:, :, ::-1]
         # return np_image
         return np.zeros((480,640,3),dtype="uint8")
         
