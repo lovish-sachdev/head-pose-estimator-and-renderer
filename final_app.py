@@ -138,7 +138,7 @@ def rotate(angle_x,angle_y,angle_z):
 
 if __name__=="__main__":
     main_dir=os.path.dirname(__file__)
-    image_to_stack=np.zeros((640,480,3),dtype="uint8")
+    image_to_stack=np.zeros((480,640,3),dtype="uint8")
     output_img=np.zeros((480,640,3),dtype="uint8")
     counter=0
     pre_x,pre_y,pre_z=90,180,0
