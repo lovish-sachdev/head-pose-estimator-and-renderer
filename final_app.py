@@ -126,7 +126,7 @@ def rotate(angle_x,angle_y,angle_z):
         width, height, _ = vtk_image.GetDimensions()
         vtk_array = vtk_image.GetPointData().GetScalars()
         vtk_array.SetNumberOfComponents(3)  # Ensure RGB
-        np_image = np.array(vtk_array)
+        # np_image = np.array(vtk_array)
         # # Convert RGB to BGR
         # np_image = np_image[:, :, ::-1]
         # return np_image
