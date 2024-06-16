@@ -71,7 +71,7 @@ class VideoProcessor(VideoTransformerBase):
                         data=np.reshape(data,(1,12,))
                         label=headpose_model.predict(data,verbose=0)[0]
                         deg_x,deg_y,deg_z,t_x,t_y,t_z=label
-                        img_to_stack=rotate(deg_x,deg_y,deg_z) 
+                        # img_to_stack=rotate(deg_x,deg_y,deg_z) 
                         output_img=np.vstack((image,img_to_stack)) 
                         output_img=cv2.resize(output_img,(640,480))
                         output_img=output_img.astype("uint8")
