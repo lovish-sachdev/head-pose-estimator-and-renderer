@@ -79,8 +79,8 @@ class VideoProcessor(VideoTransformerBase):
             return np.ones((480,640,3),dtype="uint8")*200
         frm=frame.to_ndarray(format="bgr24")
         image=cv2.flip(frm,1)
-        image2=logic(image)
-        return av.VideoFrame.from_ndarray(image2,format="bgr24")
+        # image=logic(image)
+        return av.VideoFrame.from_ndarray(image,format="bgr24")
         # return av.VideoFrame.from_ndarray(frame,format="bgr24")
 
 
